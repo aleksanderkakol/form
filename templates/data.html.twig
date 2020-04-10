@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title %}Welcome
+{% endblock %}
+{% block body %}
+	<h1>Zapisani użytkownicy</h1>
+	{% if data %}
+		<table id="users" class="table table-striped">
+			<thead>
+				<th>Imię</th>
+				<th>Nazwisko</th>
+        <th>Doświadczenie</th>
+        <th>Miasto</th>
+        <th>Kraj</th>
+        <th>Praca zdalna</th>
+        <th>Praca na miejscu</th>
+        <th>Profesja</th>
+        <th>Akcje</th>
+			</thead>
+			<tbody>
+				{% for user in data %}
+					<tr>
+						<td>{{ user.name }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.exp }}</td>
+            <td>{{ user.city }}</td>
+            <td>{{ user.country }}</td>
+            {% if user.workRemote == 1 %}
+              <td>Tak</td>
+            {% else %}
+              <td>Nie</td>
+            {% endif %}
+            {% if user.workOnSite == 1 %}
+              <td>Tak</td>
+            {% else %}
+              <td>Nie</td>
+            {% endif %}
+            <td>{{ user.occupation }}</td>
+						<td>
+							<a href="#" class="btn btn-danger delete-user" data-id="{{user.id}}">Delete</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<h2>Brak użytkowników</h2>
+	{% endif %}
+{% endblock %}
+{% block javascripts %}
+	<script src="/js/script.js" type="text/javascript"></script>
+{% endblock %}
